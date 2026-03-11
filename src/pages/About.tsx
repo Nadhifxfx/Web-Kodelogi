@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from "react";
-import {
-  Users,
-  Trophy,
-  Lightbulb,
-  Star,
-  Github,
-  Linkedin,
-} from "lucide-react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import DeveloperProfileCard from "@/components/Team";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 18 },
+  show: { opacity: 1, y: 0 },
+};
 
 /* --- ROLLING NUMBER --- */
 const RollingNumber = ({ target, duration = 2000 }) => {
@@ -69,44 +67,6 @@ const App = () => {
     setIsVisible(true);
   }, []);
 
-  /* --- TEAM DATA --- */
-  const team = [
-    {
-      name: "Alex Kurnia",
-      role: "Senior Fullstack Dev",
-      img: "https://i.pravatar.cc/150?u=alex",
-    },
-    {
-      name: "Sarah Utami",
-      role: "UI/UX Designer",
-      img: "https://i.pravatar.cc/150?u=sarah",
-    },
-    {
-      name: "Budi Rehan",
-      role: "Cloud Engineer",
-      img: "https://i.pravatar.cc/150?u=budi",
-    },
-  ];
-
-  /* --- TESTIMONIAL DATA --- */
-  const testimonials = [
-    {
-      name: "Rizky Fauzi",
-      job: "Junior Web Dev di TechID",
-      text: "Materi React-nya sangat mendalam. Dalam 3 bulan saya berhasil dapat kerja!",
-    },
-    {
-      name: "Amanda Putri",
-      job: "Mahasiswa IT",
-      text: "Komunitasnya sangat membantu. Mentor selalu standby kalau kita stuck di error.",
-    },
-    {
-      name: "Doni Setiawan",
-      job: "Freelancer",
-      text: "Belajar Tailwind di sini bikin workflow kerja saya jadi 2x lebih cepat.",
-    },
-  ];
-
   return (
     <div className="min-h-screen scroll-smooth">
       {/* HERO */}
@@ -119,13 +79,13 @@ const App = () => {
         }`}
       >
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-5xl md:text-5xl font-black text-white mb-6 leading-[1.1]">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-foreground mb-6 leading-[1.05]">
             <TypingEffect text="Membangun Karir" /> <br />
             <span className="text-gradient">Developer Masa Depan.</span>
           </h1>
 
-          <p className="text-lg md:text-xl text-zinc-400 leading-relaxed max-w-2xl mx-auto animate-pulse">
-          Kami bukan sekadar platform belajar. Kami adalah platform yang membantu pemula memahami dasar pemrograman melalui materi ringkas, contoh kode, dan kuis interaktif untuk mempersiapkan karier sebagai developer.
+          <p className="text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto">
+            Kami bukan sekadar platform belajar. Kami adalah platform yang membantu pemula memahami dasar pemrograman melalui materi ringkas, contoh kode, dan kuis interaktif untuk mempersiapkan karier sebagai developer.
           </p>
         </div>
         <div className="max-w-6xl mx-auto mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 text-justify">
@@ -179,105 +139,64 @@ const App = () => {
     </div>
       </section>
 
-      {/* TEAM */}
-      <section id="tim" className="py-12 px-6">
+      {/* TEAM (moved from Home) */}
+      <section className="py-24 px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              Instruktur Expert
-            </h2>
-            <div className="h-1 w-20 bg-cyan-500 mx-auto rounded-full"></div>
-          </div>
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.25 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+          >
+            <div className="text-center max-w-2xl mx-auto">
+              <h3 className="text-2xl md:text-3xl font-semibold tracking-tight">
+                Meet our <span className="text-gradient">Teams</span>
+              </h3>
+              <p className="mt-3 text-sm md:text-base text-muted-foreground leading-relaxed">
+                Built by developers, for future developers.
+              </p>
+            </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {team.map((member, i) => (
-              <div
-                key={member.name}
-                className="group p-8 rounded-3xl bg-zinc-950 border border-white/5 text-center transition-all hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
-              >
-                <div className="relative inline-block">
-                  <img
-                    src={member.img}
-                    alt={member.name}
-                    loading="lazy"
-                    className="w-24 h-24 rounded-2xl mx-auto mb-6 grayscale group-hover:grayscale-0 transition-all duration-500 transform group-hover:scale-110"
+            <div className="mt-10 grid md:grid-cols-3 gap-6">
+              {[
+                {
+                  name: "Isma",
+                  role: "Frontend Engineer",
+                  handle: "Ismawati Ainol Robbi",
+                  imageUrl: "/team/isma.jpg",
+                },
+                {
+                  name: "Nadhif",
+                  role: "Backend & System Architect",
+                  handle: "Nadhif Fathur Rahman",
+                  imageUrl: "/team/Nadhif.png",
+                },
+                {
+                  name: "Fahmi",
+                  role: "Programming Mentor",
+                  handle: "Fahmi Basyarahil Zawawi",
+                  imageUrl: "/team/fahmi.png",
+                },
+              ].map((member, idx) => (
+                <motion.div
+                  key={member.name}
+                  variants={fadeUp}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true, amount: 0.25 }}
+                  transition={{ duration: 0.5, ease: "easeOut", delay: 0.05 * idx }}
+                >
+                  <DeveloperProfileCard
+                    name={member.name}
+                    role={member.role}
+                    handle={member.handle}
+                    imageUrl={member.imageUrl}
                   />
-
-                  <div className="absolute inset-0 rounded-2xl border-2 border-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity scale-110"></div>
-                </div>
-
-                <h3 className="text-xl font-bold text-white">
-                  {member.name}
-                </h3>
-
-                <p className="text-cyan-500 text-sm mb-6">
-                  {member.role}
-                </p>
-
-                <div className="flex justify-center gap-4">
-                  <Github
-                    className="w-5 h-5 text-zinc-600 hover:text-white hover:scale-125 transition-transform cursor-pointer"
-                    aria-label="Github"
-                  />
-                  <Linkedin
-                    className="w-5 h-5 text-zinc-600 hover:text-cyan-400 hover:scale-125 transition-transform cursor-pointer"
-                    aria-label="LinkedIn"
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* TESTIMONIAL */}
-      <section id="testimoni" className="py-24 px-6">
-        <div className="max-w-7xl mx-auto">
-
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              Apa Kata Mereka
-            </h2>
-            <p className="text-zinc-400 max-w-xl mx-auto">
-              Beberapa pengalaman dari pengguna yang telah belajar
-              dan berkembang bersama platform kami.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            {testimonials.map((testi, i) => (
-              <div
-                key={i}
-                className="p-8 rounded-3xl bg-zinc-900/40 border border-white/5 hover:bg-zinc-900/60 transition-colors"
-              >
-                <div className="flex gap-1 mb-4 text-yellow-500">
-                  {[...Array(5)].map((_, starIndex) => (
-                    <Star key={starIndex} size={14} fill="currentColor" />
-                  ))}
-                </div>
-
-                <p className="text-zinc-300 italic mb-8 leading-relaxed">
-                  "{testi.text}"
-                </p>
-
-                <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center font-bold text-zinc-950 text-xs">
-                    {testi.name[0]}
-                  </div>
-
-                  <div>
-                    <h4 className="text-white font-bold text-sm">
-                      {testi.name}
-                    </h4>
-                    <p className="text-zinc-500 text-xs">
-                      {testi.job}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
         </div>
       </section>
 

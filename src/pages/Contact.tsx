@@ -43,10 +43,10 @@ const Contact = () => {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-12"
         >
-          <h1 className="text-5xl font-bold text-foreground mb-3">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-foreground mb-3 leading-[1.05]">
             Get in <span className="text-gradient">Touch</span>
           </h1>
-          <p className="text-muted-foreground max-w-md mx-auto">
+          <p className="text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed max-w-md mx-auto">
             Have questions about learning paths or quizzes? We'd love to hear from you.
           </p>
         </motion.div>

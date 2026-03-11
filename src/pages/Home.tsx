@@ -11,10 +11,10 @@ import {
   Rocket,
   Route,
   Shield,
+  Star,
   Zap,
   type LucideIcon,
 } from "lucide-react"
-import DeveloperProfileCard from "@/components/Team"
 import { useNavigate } from "react-router-dom"
 
 type RollingNumberProps = {
@@ -167,51 +167,61 @@ const HOME_SECTION_LEAD = "mt-3 text-sm md:text-base text-muted-foreground leadi
 const SHOWCASES = [
   {
     title: "Gojek",
-    tag: "App",
-    desc: "UI modern dengan layout rapi dan kontras yang clean.",
+    tag: "Mobile Platform / On-Demand Service",
+    desc: "Gojek adalah super app yang menyediakan berbagai layanan seperti transportasi online, pengiriman makanan, pembayaran digital, dan logistik.",
     imageSrc: "/gojek.jpg",
     accent: "from-primary/18 via-background/10 to-accent/16",
-    stack: ["/Icon/html.png", "/Icon/css.png", "/Icon/javascript.png"],
+    stack: ["/Icon/kotlin.png", "/Icon/swift.png", "/Icon/java.png","/Icon/golang.png","/Icon/postgresql.svg",],
   },
   {
     title: "Vidio",
-    tag: "Website",
-    desc: "Hero + card layout futuristik dengan glow yang subtle.",
-    imageSrc: "/Gradient.png",
+    tag: "Streaming Platform / Media Technology",
+    desc: "Vidio adalah platform streaming video Indonesia yang menyediakan film, serial, olahraga, dan siaran televisi secara online..",
+    imageSrc: "/vidio.png",
     accent: "from-accent/18 via-background/10 to-primary/16",
-    stack: ["/Icon/react.png", "/Icon/tailwind.png", "/Icon/typescript.png"],
+    stack: ["/Icon/react.png", "/Icon/tailwind.png", "/Icon/go.png", "/Icon/typescript.png"],
   },
   {
     title: "Space for the Unbound",
-    tag: "Game",
-    desc: "Komponen tabel & statistik yang fokus ke readability.",
+    tag: "Game Development / Narrative Adventure",
+    desc: "A Space for the Unbound adalah game petualangan berbasis cerita dengan visual pixel art yang menggambarkan kehidupan remaja di Indonesia pada era 1990-an. tabel & statistik yang fokus ke readability.",
     imageSrc: "/space for the unbond.jpeg",
     accent: "from-primary/16 via-background/10 to-primary/6",
-    stack: ["/Icon/javascript.png", "/Icon/react.png"],
+    stack: ["/Icon/c-sharp.png"],
   },
   {
     title: "Tokopedia",
-    tag: "Concept",
-    desc: "Design system mini untuk layout mobile.",
+    tag: "Web Platform / E-Commerce",
+    desc: "Tokopedia adalah marketplace digital yang menghubungkan jutaan penjual dan pembeli di Indonesia. Platform ini memungkinkan transaksi online, manajemen produk, sistem pembayaran, dan logistik dalam satu ekosistem.",
     imageSrc: "/Tokopedia.png",
     accent: "from-accent/14 via-background/10 to-accent/6",
     stack: ["/Icon/react.png", "/Icon/tailwind.png", "/Icon/typescript.png"],
   },
   {
     title: "Coffe Talk",
-    tag: "Game",
-    desc: "Struktur konten + navigasi yang mudah dipakai.",
+    tag: "Game Development / Visual Novel",
+    desc: "Struktur konten + Coffee Talk adalah game visual novel buatan studio Indonesia yang berfokus pada percakapan antara karakter di sebuah coffee shop dengan atmosfer santai dan cerita mendalam. yang mudah dipakai.",
     imageSrc: "/Coffe talk.webp",
     accent: "from-primary/14 via-background/10 to-accent/10",
-    stack: ["/Icon/javascript.png", "/Icon/html.png", "/Icon/css.png"],
+    stack: ["/Icon/c-sharp.png"],
+  },
+] as const
+
+const TESTIMONIALS = [
+  {
+    name: "Rizky Fauzi",
+    job: "Junior Web Dev di TechID",
+    text: "Materi React-nya sangat mendalam. Dalam 3 bulan saya berhasil dapat kerja!",
   },
   {
-    title: "Creative",
-    tag: "Experiment",
-    desc: "Eksperimen visual dengan gradient + depth.",
-    imageSrc: "/space for the unbond.jpeg",
-    accent: "from-accent/16 via-background/10 to-primary/10",
-    stack: ["/Icon/react.png", "/Icon/javascript.png"],
+    name: "Amanda Putri",
+    job: "Mahasiswa IT",
+    text: "Komunitasnya sangat membantu. Mentor selalu standby kalau kita stuck di error.",
+  },
+  {
+    name: "Doni Setiawan",
+    job: "Freelancer",
+    text: "Belajar Tailwind di sini bikin workflow kerja saya jadi 2x lebih cepat.",
   },
 ] as const
 
@@ -278,7 +288,7 @@ export default function Home() {
                   <span className="absolute -inset-0.5 rounded-full bg-primary/25 blur-xl opacity-60 animate-pulse-glow" />
                   <span className="relative inline-flex items-center gap-2">
                     <Rocket className="w-4 h-4" />
-                    Get Started Free
+                    Explore Now
                   </span>
                 </button>
               </div>
@@ -633,7 +643,7 @@ export default function Home() {
                   Project <span className="text-gradient">Showcase</span>
                 </h3>
                 <p className={HOME_SECTION_LEAD}>
-                  Contoh hasil karya dan eksperimen UI dari track yang dipelajari.
+                  Contoh hasil karya track yang telah dipelajari.
                 </p>
               </div>
 
@@ -772,8 +782,9 @@ export default function Home() {
             </div>
           </motion.div>
 
-          {/* Team */}
+          {/* Testimoni (moved from About) */}
           <motion.div
+            id="testimoni"
             variants={fadeUp}
             initial="hidden"
             whileInView="show"
@@ -781,49 +792,40 @@ export default function Home() {
             transition={{ duration: 0.5, ease: "easeOut" }}
             className="mt-20"
           >
-            <div className="text-center max-w-2xl mx-auto">
+            <div className="text-center mb-16">
               <h3 className={HOME_SECTION_HEADING}>
-                Meet our <span className="text-gradient">Teams</span>
+                Apa Kata <span className="text-gradient">Mereka</span>
               </h3>
-              <p className={HOME_SECTION_LEAD}>Built by developers, for future developers.</p>
+              <p className={HOME_SECTION_LEAD + " max-w-xl mx-auto"}>
+                Beberapa pengalaman dari pengguna yang telah belajar dan berkembang bersama platform kami.
+              </p>
             </div>
 
-            <div className="mt-10 grid md:grid-cols-3 gap-6">
-              {[
-                {
-                  name: "Isma",
-                  role: "Frontend Engineer",
-                  handle: "Ismawati Ainol Robbi",
-                  imageUrl: "/team/isma.jpg",
-                },
-                {
-                  name: "Nadhif",
-                  role: "Backend & System Architect",
-                  handle: "Nadhif Fathur Rahman",
-                  imageUrl: "/team/Nadhif.png",
-                },
-                {
-                  name: "Fahmi",
-                  role: "Programming Mentor",
-                  handle: "Fahmi Basyarahil Zawawi",
-                  imageUrl: "/team/fahmi.png",
-                },
-              ].map((member, idx) => (
-                <motion.div
-                  key={member.name}
-                  variants={fadeUp}
-                  initial="hidden"
-                  whileInView="show"
-                  viewport={{ once: true, amount: 0.25 }}
-                  transition={{ duration: 0.5, ease: "easeOut", delay: 0.05 * idx }}
+            <div className="grid md:grid-cols-3 gap-6">
+              {TESTIMONIALS.map((testi, i) => (
+                <div
+                  key={i}
+                  className="p-8 rounded-3xl border border-accent/16 bg-card/35 hover:bg-card/45 transition-colors"
                 >
-                  <DeveloperProfileCard
-                    name={member.name}
-                    role={member.role}
-                    handle={member.handle}
-                    imageUrl={member.imageUrl}
-                  />
-                </motion.div>
+                  <div className="flex gap-1 mb-4 text-primary">
+                    {[...Array(5)].map((_, starIndex) => (
+                      <Star key={starIndex} size={14} fill="currentColor" />
+                    ))}
+                  </div>
+
+                  <p className="text-foreground/90 italic mb-8 leading-relaxed">"{testi.text}"</p>
+
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-full bg-primary/15 border border-primary/25 flex items-center justify-center font-bold text-primary text-xs">
+                      {testi.name[0]}
+                    </div>
+
+                    <div>
+                      <h4 className="text-foreground font-semibold text-sm">{testi.name}</h4>
+                      <p className="text-muted-foreground text-xs">{testi.job}</p>
+                    </div>
+                  </div>
+                </div>
               ))}
             </div>
           </motion.div>

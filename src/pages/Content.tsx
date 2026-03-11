@@ -35,7 +35,9 @@ const ContentPage = () => {
 
             <div className="flex items-center gap-4 mb-6">
               <span className="text-4xl">{selected.icon}</span>
-              <h1 className="text-3xl font-bold text-foreground">{selected.title}</h1>
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-foreground leading-[1.1]">
+                {selected.title}
+              </h1>
             </div>
 
             <p className="text-muted-foreground leading-relaxed mb-8 text-justify">
@@ -73,11 +75,11 @@ const ContentPage = () => {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-12"
         >
-          <h1 className="text-5xl md:text-5xl font-bold text-foreground mb-4">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-foreground mb-4 leading-[1.05]">
             Choose Your <span className="text-gradient">Challenge</span>
           </h1>
 
-          <p className="text-muted-foreground max-w-lg mx-auto">
+          <p className="text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto">
             Jelajahi berbagai topik pemrograman melalui penjelasan singkat, contoh kode, dan kuis interaktif. Pilih kategori untuk mulai belajar.
           </p>
         </motion.div>
