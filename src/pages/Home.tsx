@@ -262,7 +262,7 @@ export default function Home() {
           >
             <div className="mx-auto max-w-3xl text-center">
               <h1 className="mt-7 text-4xl sm:text-5xl md:text-6xl font-semibold leading-[1.05] tracking-tight">
-                Dari Nol Jadi Developer
+                Dari Nol Jadi <span className="text-gradient">Developer</span>
               </h1>
 
               <p className="mt-5 text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto">
@@ -794,7 +794,7 @@ export default function Home() {
                   name: "Isma",
                   role: "Frontend Engineer",
                   handle: "Ismawati Ainol Robbi",
-                  imageUrl: "/team/isma.png",
+                  imageUrl: "/team/isma.jpg",
                 },
                 {
                   name: "Nadhif",
