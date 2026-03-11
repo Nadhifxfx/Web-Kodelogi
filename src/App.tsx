@@ -1,10 +1,10 @@
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import HomePage from "./pages/Home";
-import ContentPage from "./pages/Content";
-import AboutPage from "./pages/About";
-import ContactPage from "./pages/Contact";
 import Footer from "./components/Footer";
+import Home from "./pages/Home";
+import ContentPage from "./pages/Content";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
 
 export default function App() {
   return (
@@ -12,10 +12,10 @@ export default function App() {
       <Navbar />
       <div className="flex-1">
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/content" element={<ContentPage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/content" element={<Content />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
         </Routes>
       </div>
       <Footer />
