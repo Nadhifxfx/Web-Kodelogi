@@ -71,7 +71,7 @@ const ContentPage = () => {
 
             {/* Quiz */}
             <div className="rounded-xl border border-border bg-card p-6">
-              <h2 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">🧩 Challenge</h2>
+              <h2 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">🧩 Course</h2>
               <QuizBlock quiz={selected.quiz} />
             </div>
           </motion.div>
@@ -91,7 +91,7 @@ const ContentPage = () => {
           className="text-center mb-12"
         >
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-foreground mb-4 leading-[1.05]">
-            Choose Your <span className="text-gradient">Challenge</span>
+            Choose Your <span className="text-gradient">Courses</span>
           </h1>
 
           <p className="text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto">

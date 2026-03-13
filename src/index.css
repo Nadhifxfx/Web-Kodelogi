@@ -84,6 +84,13 @@
   .glow-error {
     box-shadow: var(--glow-error);
   }
+  .bg-grid-soft {
+    background-image:
+      linear-gradient(to right, hsl(var(--border) / 0.22) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--border) / 0.22) 1px, transparent 1px);
+    background-size: 36px 36px;
+    background-position: center;
+  }
   .text-gradient {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent;
   }

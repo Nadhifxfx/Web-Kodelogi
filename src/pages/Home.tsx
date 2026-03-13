@@ -147,6 +147,30 @@ const TRACKS: Track[] = [
     },
     items: ["UI Mobile Patterns", "State + Data Fetching", "Build & Release"],
   },
+  {
+    key: "game",
+    title: "Game Developer",
+    description: "Bangun gameplay, sistem level, dan optimasi performa runtime.",
+    icon: Zap,
+    tone: {
+      card: "border-accent/16 bg-card/35",
+      iconWrap: "bg-primary/14 text-primary border-primary/22",
+      link: "text-primary",
+    },
+    items: ["Game Loop + Engine Basics", "Gameplay System + UI", "Optimization + Build"],
+  },
+  {
+    key: "ml",
+    title: "Machine Learning",
+    description: "Belajar model prediksi dari data: training, evaluasi, dan deployment.",
+    icon: Star,
+    tone: {
+      card: "border-accent/16 bg-card/35",
+      iconWrap: "bg-primary/14 text-primary border-primary/22",
+      link: "text-primary",
+    },
+    items: ["Python + Data", "Model Training + Evaluation", "Deploy + Monitoring"],
+  },
 ]
 
 const COURSES: Course[] = TRACKS.map((track) => ({
@@ -229,6 +253,7 @@ export default function Home() {
   const navigate = useNavigate()
   const [showcaseIndex, setShowcaseIndex] = useState(0)
   const [showcaseDirection, setShowcaseDirection] = useState<1 | -1>(1)
+  const [openTrackKey, setOpenTrackKey] = useState<string | null>(TRACKS[0]?.key ?? null)
 
   const showcaseTotal = Math.max(1, SHOWCASES.length)
   const currentShowcase = SHOWCASES[showcaseIndex % showcaseTotal]
@@ -241,6 +266,10 @@ export default function Home() {
   const handleShowcaseNext = () => {
     setShowcaseDirection(1)
     setShowcaseIndex((idx) => (idx + 1) % showcaseTotal)
+  }
+
+  const handleOpenTrack = (key: string) => {
+    setOpenTrackKey((current) => (current === key ? null : key))
   }
 
   return (
@@ -323,247 +352,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CONTENT: LEARNING PATH + COURSES */}
-      <section id="content" className="py-20 md:py-24">
-        <div className="container">
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.25 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-            className="max-w-3xl"
-          >
-            <div className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-card/30 px-4 py-1.5 text-xs tracking-widest uppercase text-muted-foreground">
-              <span className="h-1.5 w-1.5 rounded-full bg-primary" aria-hidden />
-              What we do?
-            </div>
-
-            <h2 className={"mt-5 " + HOME_SECTION_HEADING}>
-              Learning <span className="text-gradient">Path</span>
-            </h2>
-
-            <p className={HOME_SECTION_LEAD + " max-w-2xl"}>
-              Roadmap bertingkat untuk dari nol sampai siap bikin project nyata — rapi, terstruktur, dan fokus ke skill yang relevan.
-            </p>
-          </motion.div>
-
-          <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {TRACKS.map((track, index) => {
-              const Icon = track.icon
-
-              return (
-                <motion.div
-                  key={track.key}
-                  variants={fadeUp}
-                  initial="hidden"
-                  whileInView="show"
-                  viewport={{ once: true, amount: 0.25 }}
-                  transition={{ duration: 0.5, ease: "easeOut", delay: 0.05 * index }}
-                  className={
-                    "group relative overflow-hidden rounded-3xl border backdrop-blur-sm p-7 transition-all hover:scale-[1.01] hover:shadow-[0_24px_80px_-60px_hsl(var(--primary)/0.75)] " +
-                    track.tone.card
-                  }
-                >
-                  <div className="pointer-events-none absolute inset-0" aria-hidden>
-                    <div className="absolute inset-0 bg-gradient-to-br from-background/0 via-background/20 to-background/0" />
-                    <div className="absolute -top-20 -right-24 h-48 w-48 rounded-full bg-background/30 blur-2xl" />
-                  </div>
-
-                  <div className="relative">
-                    <div className="flex items-start justify-between gap-4">
-                      <div
-                        className={
-                          "inline-flex h-12 w-12 items-center justify-center rounded-2xl border shadow-[0_24px_80px_-70px_hsl(var(--primary)/0.9)] " +
-                          track.tone.iconWrap
-                        }
-                      >
-                        <Icon className="h-5 w-5" />
-                      </div>
-
-                      <span className="text-xs font-semibold tracking-widest uppercase text-muted-foreground">
-                        Learning Path
-                      </span>
-                    </div>
-
-                    <h3 className="mt-5 text-xl font-semibold tracking-tight">{track.title}</h3>
-
-                    <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{track.description}</p>
-
-                    <ul className="mt-4 space-y-2">
-                      {track.items.map((item) => (
-                        <li key={item} className="flex items-start gap-2 text-sm text-foreground/90">
-                          <BadgeCheck className="mt-0.5 h-4 w-4 text-muted-foreground" />
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-
-                    <button
-                      type="button"
-                      onClick={() => navigate("/courses")}
-                      className={
-                        "mt-6 inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase transition-colors hover:text-foreground " +
-                        track.tone.link
-                      }
-                    >
-                      Learn more <span aria-hidden>→</span>
-                    </button>
-                  </div>
-                </motion.div>
-              )
-            })}
-          </div>
-
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.25 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-            className="mt-16"
-          >
-            <div className="flex items-end justify-between gap-6 flex-wrap">
-              <div>
-                <h3 className={HOME_SECTION_HEADING}>
-                  Courses by <span className="text-gradient">Track</span>
-                </h3>
-                <p className={HOME_SECTION_LEAD}>Pilih track dan mulai belajar dari kurikulum yang relevan.</p>
-              </div>
-            </div>
-
-            <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {COURSES.map((course, idx) => (
-                <motion.div
-                  key={course.title}
-                  variants={fadeUp}
-                  initial="hidden"
-                  whileInView="show"
-                  viewport={{ once: true, amount: 0.25 }}
-                  transition={{ duration: 0.5, ease: "easeOut", delay: 0.04 * idx }}
-                  className="group relative overflow-hidden rounded-3xl border border-accent/16 bg-card/30 backdrop-blur-sm min-h-[520px] transition-all hover:scale-[1.01] hover:border-accent/26 hover:shadow-[0_30px_120px_-95px_hsl(var(--primary)/0.9)]"
-                >
-                  {(() => {
-                    const imageSrc = courseImageUrlFor(course.title)
-                    return (
-                      <>
-                        {/* Background */}
-                        <div className="absolute inset-0">
-                          <div className="absolute inset-0 bg-gradient-to-br from-primary/18 via-accent/10 to-black/30" />
-                          <div
-                            className="absolute inset-0 bg-cover bg-center scale-110 opacity-60"
-                            style={{ backgroundImage: `url(${imageSrc})` }}
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/40 to-black/85" />
-                          <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-accent/10 opacity-80" />
-                        </div>
-
-                        {/* Foreground content */}
-                        <div className="relative flex flex-col h-full">
-                          <div className="px-8 pt-10 pb-6 flex items-start justify-center">
-                            <div className="relative w-[240px] max-w-[75%] h-[220px]">
-                              <div className="absolute inset-0 rounded-3xl border border-border/60 bg-background/10 backdrop-blur-sm flex items-center justify-center">
-                                {(() => {
-                                  const Icon = course.icon
-                                  return <Icon className="w-8 h-8 text-primary" />
-                                })()}
-                              </div>
-                              <img
-                                src={imageSrc}
-                                alt={course.title}
-                                loading="lazy"
-                                onError={(event) => {
-                                  event.currentTarget.classList.add("hidden")
-                                }}
-                                className="relative w-full h-full object-contain drop-shadow-[0_30px_80px_rgba(0,0,0,0.55)]"
-                              />
-                            </div>
-                          </div>
-
-                          <div className="mt-auto px-8 pb-8">
-                            <div className="text-2xl md:text-3xl font-semibold tracking-tight text-foreground">
-                              {course.title}
-                            </div>
-                            <p className="mt-3 text-sm md:text-base text-foreground/80 leading-relaxed max-w-sm">
-                              {course.description}
-                            </p>
-
-                            <button
-                              type="button"
-                              onClick={() => navigate("/courses")}
-                              className="mt-7 inline-flex items-center justify-center rounded-xl border border-border/60 bg-background/10 px-6 py-3 text-sm font-semibold text-foreground/90 transition-all hover:border-primary/30 hover:text-primary hover:glow-primary"
-                            >
-                              {course.ctaLabel}
-                            </button>
-                          </div>
-                        </div>
-                      </>
-                    )
-                  })()}
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.25 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-            className="mt-16"
-          >
-            <div className="flex items-end justify-between gap-6 flex-wrap">
-              <div>
-                <h3 className={HOME_SECTION_HEADING}>
-                  Challenge by <span className="text-gradient">Track</span>
-                </h3>
-                <p className={HOME_SECTION_LEAD}>
-                  Pilih bidang kerja dan mulai challenge yang sesuai fokus skill.
-                </p>
-              </div>
-            </div>
-
-            <div className="mt-8 overflow-hidden rounded-3xl border border-border/60 bg-card/30 backdrop-blur-sm">
-              <div className="divide-y divide-border/60">
-                {TRACKS.map((track) => {
-                  const Icon = track.icon
-
-                  return (
-                    <button
-                      key={track.key}
-                      type="button"
-                      onClick={() => navigate("/courses")}
-                      className="w-full text-left px-6 py-5 flex items-start gap-4 transition-colors hover:bg-background/10"
-                    >
-                      <div
-                        className={
-                          "mt-0.5 inline-flex h-10 w-10 items-center justify-center rounded-2xl border " +
-                          track.tone.iconWrap
-                        }
-                        aria-hidden
-                      >
-                        <Icon className="h-5 w-5" />
-                      </div>
-
-                      <div className="flex-1">
-                        <div className="text-sm font-semibold tracking-tight">{track.title}</div>
-                        <div className="mt-1 text-sm text-muted-foreground leading-relaxed">{track.description}</div>
-                      </div>
-
-                      <div className={"pt-0.5 text-xs font-semibold tracking-widest uppercase " + track.tone.link}>
-                        Start →
-                      </div>
-                    </button>
-                  )
-                })}
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ABOUT */}
+      {/* WHY CHOOSE */}
       <section id="about" className="py-20 md:py-24 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-accent/10" />
         <div className="container relative">
@@ -627,7 +416,239 @@ export default function Home() {
               )
             })}
           </div>
+        </div>
+      </section>
 
+      {/* CONTENT: LEARNING PATH + COURSES */}
+      <section id="content" className="py-20 md:py-24">
+        <div className="container">
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.25 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="max-w-3xl"
+          >
+            <div className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-card/30 px-4 py-1.5 text-xs tracking-widest uppercase text-muted-foreground">
+              <span className="h-1.5 w-1.5 rounded-full bg-primary" aria-hidden />
+              What we do?
+            </div>
+
+            <h2 className={"mt-5 " + HOME_SECTION_HEADING}>
+              Learning <span className="text-gradient">Path</span>
+            </h2>
+
+            <p className={HOME_SECTION_LEAD + " max-w-2xl"}>
+              Roadmap bertingkat untuk dari nol sampai siap bikin project nyata — rapi, terstruktur, dan fokus ke skill yang relevan.
+            </p>
+          </motion.div>
+
+          <div className="mt-12 grid gap-8 lg:gap-10 lg:grid-cols-[0.95fr_1.05fr] items-start">
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.25 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              className="relative"
+            >
+              <div className="flex items-start justify-center lg:justify-start">
+                <img
+                  src="/robot.png"
+                  alt=""
+                  aria-hidden
+                  loading="lazy"
+                  draggable={false}
+                  className="w-full max-w-[1080px] aspect-square object-contain"
+                />
+              </div>
+            </motion.div>
+
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.25 }}
+              transition={{ duration: 0.5, ease: "easeOut", delay: 0.06 }}
+            >
+              <div className="overflow-hidden rounded-3xl border border-border/60 bg-card/30 backdrop-blur-sm">
+                <div className="divide-y divide-border/60">
+                  {TRACKS.map((track, index) => {
+                    const Icon = track.icon
+                    const isOpen = openTrackKey === track.key
+
+                    return (
+                      <div key={track.key} className="group">
+                        <button
+                          type="button"
+                          onClick={() => handleOpenTrack(track.key)}
+                          aria-expanded={isOpen}
+                          className="w-full cursor-pointer select-none px-6 py-5 flex items-start gap-4 transition-colors hover:bg-background/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/35 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                        >
+                          <div
+                            className={
+                              "mt-0.5 inline-flex h-10 w-10 items-center justify-center rounded-2xl border " +
+                              track.tone.iconWrap
+                            }
+                            aria-hidden
+                          >
+                            <Icon className="h-5 w-5" />
+                          </div>
+
+                          <div className="flex-1 min-w-0">
+                            <p className="text-sm font-semibold tracking-tight">{track.title}</p>
+                            <p className="mt-1 text-sm text-muted-foreground leading-relaxed">
+                              {track.description}
+                            </p>
+                          </div>
+
+                          <div className="pt-1 text-muted-foreground">
+                            <ChevronRight
+                              className={
+                                "h-5 w-5 transition-transform duration-200 " +
+                                (isOpen ? "rotate-90" : "")
+                              }
+                            />
+                          </div>
+                        </button>
+
+                        {isOpen ? (
+                          <div className="px-6 pb-6 -mt-1">
+                            <ul className="mt-2 space-y-2">
+                              {track.items.map((item) => (
+                                <li key={item} className="flex items-start gap-2 text-sm text-foreground/90">
+                                  <BadgeCheck className="mt-0.5 h-4 w-4 text-muted-foreground" />
+                                  <span>{item}</span>
+                                </li>
+                              ))}
+                            </ul>
+
+                            <div className="mt-5 flex flex-wrap items-center gap-3">
+                              <button
+                                type="button"
+                                onClick={() => navigate("/learning-path")}
+                                className={
+                                  "inline-flex items-center gap-2 rounded-full border border-border/60 bg-background/40 px-5 py-2 text-xs font-semibold tracking-widest uppercase transition-colors hover:bg-background/60 " +
+                                  track.tone.link
+                                }
+                              >
+                                Lihat Path <span aria-hidden>→</span>
+                              </button>
+
+                              {index === 0 ? (
+                                <p className="text-xs text-muted-foreground">
+                                  Mulai dari sini kalau kamu baru belajar.
+                                </p>
+                              ) : null}
+                            </div>
+                          </div>
+                        ) : null}
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.25 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="mt-16"
+          >
+            <div className="flex items-end justify-between gap-6 flex-wrap">
+              <div>
+                <h3 className={HOME_SECTION_HEADING}>
+                  Courses by <span className="text-gradient">Track</span>
+                </h3>
+                <p className={HOME_SECTION_LEAD}>Pilih track dan mulai belajar dari kurikulum yang relevan.</p>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => navigate("/courses")}
+                className="inline-flex h-11 items-center justify-center rounded-2xl bg-primary text-primary-foreground px-6 font-semibold transition-transform hover:scale-[1.04]"
+              >
+                See all
+              </button>
+            </div>
+
+            <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {COURSES.slice(0, 3).map((course, idx) => (
+                <motion.div
+                  key={course.title}
+                  variants={fadeUp}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true, amount: 0.25 }}
+                  transition={{ duration: 0.5, ease: "easeOut", delay: 0.04 * idx }}
+                  className="group relative overflow-hidden rounded-3xl border border-accent/16 bg-card/30 backdrop-blur-sm min-h-[520px] transition-all hover:scale-[1.01] hover:border-accent/26 hover:shadow-[0_30px_120px_-95px_hsl(var(--primary)/0.9)]"
+                >
+                  {(() => {
+                    const imageSrc = courseImageUrlFor(course.title)
+                    return (
+                      <>
+                        {/* Background */}
+                        <div className="absolute inset-0">
+                          <div className="absolute inset-0 bg-gradient-to-br from-primary/18 via-accent/10 to-black/30" />
+                          <div
+                            className="absolute inset-0 bg-cover bg-center scale-110 opacity-60"
+                            style={{ backgroundImage: `url(${imageSrc})` }}
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/40 to-black/85" />
+                          <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-accent/10 opacity-80" />
+                        </div>
+
+                        {/* Foreground content */}
+                        <div className="relative flex flex-col h-full">
+                          <div className="px-8 pt-10 pb-6 flex items-start justify-center">
+                            <div className="relative w-[240px] max-w-[75%] h-[220px]">
+                              <div className="absolute inset-0 rounded-3xl border border-border/60 bg-background/10 backdrop-blur-sm flex items-center justify-center">
+                                {(() => {
+                                  const Icon = course.icon
+                                  return <Icon className="w-8 h-8 text-primary" />
+                                })()}
+                              </div>
+                              <img
+                                src={imageSrc}
+                                alt={course.title}
+                                loading="lazy"
+                                onError={(event) => {
+                                  event.currentTarget.classList.add("hidden")
+                                }}
+                                className="relative w-full h-full object-contain drop-shadow-[0_30px_80px_rgba(0,0,0,0.55)]"
+                              />
+                            </div>
+                          </div>
+
+                          <div className="mt-auto px-8 pb-8">
+                            <div className="text-2xl md:text-3xl font-semibold tracking-tight text-foreground">
+                              {course.title}
+                            </div>
+                            <p className="mt-3 text-sm md:text-base text-foreground/80 leading-relaxed max-w-sm">
+                              {course.description}
+                            </p>
+                          </div>
+                        </div>
+                      </>
+                    )
+                  })()}
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+
+        </div>
+      </section>
+
+      {/* SHOWCASE */}
+      <section id="showcase" className="py-20 md:py-24 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-accent/10" />
+        <div className="container relative">
           {/* Showcase */}
           <motion.div
             variants={fadeUp}
@@ -635,7 +656,7 @@ export default function Home() {
             whileInView="show"
             viewport={{ once: true, amount: 0.25 }}
             transition={{ duration: 0.5, ease: "easeOut" }}
-            className="mt-20"
+            className="mt-0"
           >
             <div className="flex items-end justify-between gap-6 flex-wrap">
               <div className="max-w-2xl">
