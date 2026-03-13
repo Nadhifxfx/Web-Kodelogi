@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 
 const NAV_LINKS: { label: string; path: string }[] = [
   { label: "Home", path: "/" },
-  { label: "Kursus", path: "/content" },
+  { label: "Courses", path: "/courses" },
   { label: "Tentang Kami", path: "/about" },
   { label: "Karir", path: "/contact" },
 ]

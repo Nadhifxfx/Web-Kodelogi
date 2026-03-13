@@ -13,6 +13,13 @@ const ContentPage = () => {
 
   const selected = categories.find((c) => c.id === selectedId);
 
+  const isSelectedIconImage =
+    !!selected &&
+    (selected.icon.startsWith("/") ||
+      selected.icon.includes(".png") ||
+      selected.icon.includes(".svg") ||
+      selected.icon.includes(".webp"));
+
   // FILTER GROUP
   const filteredCategories = selectedGroup
     ? categories.filter((c) => c.group === selectedGroup)
@@ -26,7 +33,7 @@ const ContentPage = () => {
         <div className="container mx-auto px-6 max-w-3xl">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
             <button
-              onClick={() => navigate("/content")}
+              onClick={() => navigate("/courses")}
               className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-8 transition-colors"
             >
               <ArrowLeft className="w-4 h-4" />
@@ -34,7 +41,15 @@ const ContentPage = () => {
             </button>
 
             <div className="flex items-center gap-4 mb-6">
-              <span className="text-4xl">{selected.icon}</span>
+              {isSelectedIconImage ? (
+                <img
+                  src={selected.icon}
+                  alt={`${selected.title} icon`}
+                  className="w-10 h-10 object-contain"
+                />
+              ) : (
+                <span className="text-4xl">{selected.icon}</span>
+              )}
               <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-foreground leading-[1.1]">
                 {selected.title}
               </h1>

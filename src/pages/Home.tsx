@@ -282,7 +282,7 @@ export default function Home() {
               <div className="mt-9 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4">
                 <button
                   type="button"
-                  onClick={() => navigate("/content")}
+                  onClick={() => navigate("/courses")}
                   className="relative inline-flex w-full sm:w-auto max-w-sm sm:max-w-none mx-auto items-center justify-center gap-2 rounded-full bg-primary text-primary-foreground px-7 py-3.5 font-semibold transition-all hover:glow-primary hover:scale-[1.02]"
                 >
                   <span className="absolute -inset-0.5 rounded-full bg-primary/25 blur-xl opacity-60 animate-pulse-glow" />
@@ -401,7 +401,7 @@ export default function Home() {
 
                     <button
                       type="button"
-                      onClick={() => navigate("/content")}
+                      onClick={() => navigate("/courses")}
                       className={
                         "mt-6 inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase transition-colors hover:text-foreground " +
                         track.tone.link
@@ -490,7 +490,7 @@ export default function Home() {
 
                             <button
                               type="button"
-                              onClick={() => navigate("/content")}
+                              onClick={() => navigate("/courses")}
                               className="mt-7 inline-flex items-center justify-center rounded-xl border border-border/60 bg-background/10 px-6 py-3 text-sm font-semibold text-foreground/90 transition-all hover:border-primary/30 hover:text-primary hover:glow-primary"
                             >
                               {course.ctaLabel}
@@ -533,7 +533,7 @@ export default function Home() {
                     <button
                       key={track.key}
                       type="button"
-                      onClick={() => navigate("/content")}
+                      onClick={() => navigate("/courses")}
                       className="w-full text-left px-6 py-5 flex items-start gap-4 transition-colors hover:bg-background/10"
                     >
                       <div
@@ -855,7 +855,7 @@ export default function Home() {
 
               <button
                 type="button"
-                onClick={() => navigate("/content")}
+                onClick={() => navigate("/courses")}
                 className="relative inline-flex items-center justify-center gap-2 rounded-2xl bg-primary text-primary-foreground px-7 py-4 font-semibold transition-all hover:glow-primary hover:scale-[1.02]"
               >
                 <span className="absolute -inset-0.5 rounded-2xl bg-primary/25 blur-xl opacity-60 animate-pulse-glow" />
