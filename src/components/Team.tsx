@@ -68,7 +68,7 @@ export default function DeveloperProfileCard({
               alt={name}
               loading="lazy"
               onError={(e) => { e.currentTarget.style.display = "none" }}
-              className="absolute inset-0 w-full h-full object-cover object-center"
+              className="absolute inset-0 w-full h-full object-cover object-[55%_30%] object-center"
               style={{ filter: "drop-shadow(0 20px 40px rgba(0,0,0,0.7))" }}
             />
           ) : (

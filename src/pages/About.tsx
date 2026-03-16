@@ -139,7 +139,7 @@ const App = () => {
     </div>
       </section>
 
-      {/* TEAM (moved from Home) */}
+      {/* TEAM */}
       <section className="py-24 px-6">
         <div className="max-w-7xl mx-auto">
           <motion.div
@@ -157,14 +157,14 @@ const App = () => {
                 Built by developers, for future developers.
               </p>
             </div>
-
-            <div className="mt-10 grid md:grid-cols-3 gap-6">
+ 
+            <div className="mt-10 grid md:grid-cols-3 gap-6 object-top">
               {[
                 {
                   name: "Isma",
                   role: "Frontend Engineer",
                   handle: "Ismawati Ainol Robbi",
-                  imageUrl: "/team/isma.jpg",
+                  imageUrl: "/team/isma.png",
                 },
                 {
                   name: "Nadhif",
@@ -176,7 +176,7 @@ const App = () => {
                   name: "Fahmi",
                   role: "Programming Mentor",
                   handle: "Fahmi Basyarahil Zawawi",
-                  imageUrl: "/team/fahmi.png",
+                  imageUrl: "/team/fahmi.jpeg",
                 },
               ].map((member, idx) => (
                 <motion.div
