@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import DeveloperProfileCard from "@/components/Team";
+import { Check } from "lucide-react";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 18 },
@@ -39,26 +40,6 @@ const RollingNumber = ({ target, duration = 2000 }) => {
   );
 };
 
-/* --- TYPING EFFECT --- */
-const TypingEffect = ({ text, speed = 100 }) => {
-  const [displayedText, setDisplayedText] = useState("");
-
-  useEffect(() => {
-    let i = 0;
-
-    const timer = setInterval(() => {
-      setDisplayedText(text.slice(0, i + 1));
-      i++;
-
-      if (i >= text.length) clearInterval(timer);
-    }, speed);
-
-    return () => clearInterval(timer);
-  }, [text, speed]);
-
-  return <span>{displayedText}</span>;
-};
-
 /* --- APP --- */
 const App = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -72,15 +53,15 @@ const App = () => {
       {/* HERO */}
       <section
         id="home"
-        className={`pt-24 pb-20 px-6 transition-all duration-1000 transform ${
+        className={`pt-14 md:pt-20 pb-20 px-6 transition-all duration-1000 transform ${
           isVisible
             ? "translate-y-0 opacity-100"
             : "translate-y-10 opacity-0"
         }`}
       >
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-foreground mb-6 leading-[1.05]">
-            <TypingEffect text="Membangun Karir" /> <br />
+          <h1 className="mt-7 text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-foreground mb-6 leading-[1.05]">
+            Membangun Karir <br />
             <span className="text-gradient">Developer Masa Depan.</span>
           </h1>
 
@@ -88,55 +69,51 @@ const App = () => {
             Kami bukan sekadar platform belajar. Kami adalah platform yang membantu pemula memahami dasar pemrograman melalui materi ringkas, contoh kode, dan kuis interaktif untuk mempersiapkan karier sebagai developer.
           </p>
         </div>
-        <div className="max-w-6xl mx-auto mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 text-justify">
-            {[
-              {
-                title: "Apa yang Kami Tawarkan",
-                desc: "Materi pembelajaran yang fokus pada konsep inti pemrograman seperti HTML, CSS, JavaScript, Python, dan algoritma dasar.",
-                color: "from-zinc-500/20 to-gray-800/20",
-              },
-              {
-                title: "Tujuan Platform",
-                desc: "Membantu pemula memahami dasar coding dengan cara yang lebih sederhana, praktis, dan mudah dipahami tanpa harus membaca materi yang terlalu panjang.",
-                color: "from-zinc-500/20 to-gray-800/20",
-              },
-              {
-                title: "Metode Belajar",
-                desc: "Setiap topik dilengkapi dengan penjelasan singkat, contoh kode, serta kuis interaktif untuk membantu pengguna memahami materi secara lebih efektif.",
-                color: "from-zinc-500/20 to-gray-800/20",
-              },
-            ].map((item, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                whileHover={{ y: -6, scale: 1.02 }}
-                className="group h-full"
-              >
-                <div className="relative rounded-xl border border-border bg-card p-6 h-full flex flex-col transition-all duration-300 group-hover:glow-primary group-hover:border-primary/30 overflow-hidden">
-                  <div
-                    className={`absolute inset-0 bg-gradient-to-br ${item.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
-                  />
-
-                  <div className="relative z-10">
-                    <div className="flex items-center gap-3 mb-3">
-                      <span className="text-2xl text-primary">
-                      </span>
-
-                      <h3 className="text-lg font-bold text-foreground">
-                        {item.title}
-                      </h3>
-                    </div>
-
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      {item.desc}
-                    </p>
-                  </div>
+        <div className="max-w-6xl mx-auto mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
+          {[
+            {
+              title: "Apa yang Kami Tawarkan",
+              desc: "Materi pembelajaran yang fokus pada konsep inti pemrograman seperti HTML, CSS, JavaScript, Python, dan algoritma dasar.",
+            },
+            {
+              title: "Tujuan Platform",
+              desc: "Membantu pemula memahami dasar coding dengan cara yang lebih sederhana, praktis, dan mudah dipahami tanpa harus membaca materi yang terlalu panjang.",
+            },
+            {
+              title: "Metode Belajar",
+              desc: "Setiap topik dilengkapi dengan penjelasan singkat, contoh kode, serta kuis interaktif untuk membantu pengguna memahami materi secara lebih efektif.",
+            },
+          ].map((item, i) => (
+            <motion.div
+              key={item.title}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              whileHover={{ y: -6, scale: 1.02 }}
+              className="group h-full"
+            >
+              <div className="h-full flex flex-col items-center">
+                <div
+                  className="h-16 w-16 rounded-full border border-primary/30 bg-primary text-primary-foreground flex items-center justify-center shadow-none group-hover:glow-primary"
+                  aria-hidden
+                >
+                  <Check className="h-7 w-7" />
                 </div>
-              </motion.div>
-            ))}
-    </div>
+
+                <div className="relative mt-6 w-full flex-1 overflow-hidden rounded-3xl border border-border/60 bg-card/40 backdrop-blur-sm px-8 pb-10 pt-10 text-center transition-all duration-300 group-hover:glow-primary group-hover:border-primary/30">
+                  <div className="absolute inset-0 bg-gradient-to-b from-background/0 via-background/0 to-background/10" aria-hidden />
+
+                  <h3 className="text-lg font-semibold tracking-tight text-foreground">
+                    {item.title}
+                  </h3>
+                  <p className="mt-4 text-sm text-foreground/80 leading-relaxed">
+                    {item.desc}
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </section>
 
       {/* TEAM */}

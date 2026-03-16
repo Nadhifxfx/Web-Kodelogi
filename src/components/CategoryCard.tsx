@@ -10,13 +10,19 @@ interface CategoryCardProps {
 const CategoryCard = ({ category, index }: CategoryCardProps) => {
   const navigate = useNavigate();
 
+  const isIconImage =
+    category.icon.startsWith("/") ||
+    category.icon.includes(".png") ||
+    category.icon.includes(".svg") ||
+    category.icon.includes(".webp");
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: index * 0.08 }}
       whileHover={{ y: -6, scale: 1.02 }}
-      onClick={() => navigate(`/content?category=${category.id}`)}
+      onClick={() => navigate(`/courses?category=${category.id}`)}
       className="group cursor-pointer"
     >
       <div className="relative h-full rounded-xl border border-border bg-card p-6 transition-all duration-300 group-hover:border-primary/30 overflow-hidden">
@@ -30,7 +36,16 @@ const CategoryCard = ({ category, index }: CategoryCardProps) => {
 
           {/* Title */}
           <div className="flex items-center gap-3 mb-3">
-            <span className="text-3xl">{category.icon}</span>
+            {isIconImage ? (
+              <img
+                src={category.icon}
+                alt={`${category.title} icon`}
+                className="w-9 h-9 object-contain"
+                loading="lazy"
+              />
+            ) : (
+              <span className="text-3xl">{category.icon}</span>
+            )}
             <h3 className="text-lg font-bold text-foreground">
               {category.title}
             </h3>

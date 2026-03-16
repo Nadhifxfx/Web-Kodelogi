@@ -13,6 +13,13 @@ const ContentPage = () => {
 
   const selected = categories.find((c) => c.id === selectedId);
 
+  const isSelectedIconImage =
+    !!selected &&
+    (selected.icon.startsWith("/") ||
+      selected.icon.includes(".png") ||
+      selected.icon.includes(".svg") ||
+      selected.icon.includes(".webp"));
+
   // FILTER GROUP
   const filteredCategories = selectedGroup
     ? categories.filter((c) => c.group === selectedGroup)
@@ -22,11 +29,11 @@ const ContentPage = () => {
 
   if (selected) {
     return (
-      <div className="min-h-screen pt-24 py-12">
+      <div className="min-h-screen pt-14 md:pt-20 pb-12">
         <div className="container mx-auto px-6 max-w-3xl">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
             <button
-              onClick={() => navigate("/content")}
+              onClick={() => navigate("/courses")}
               className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-8 transition-colors"
             >
               <ArrowLeft className="w-4 h-4" />
@@ -34,7 +41,15 @@ const ContentPage = () => {
             </button>
 
             <div className="flex items-center gap-4 mb-6">
-              <span className="text-4xl">{selected.icon}</span>
+              {isSelectedIconImage ? (
+                <img
+                  src={selected.icon}
+                  alt={`${selected.title} icon`}
+                  className="w-10 h-10 object-contain"
+                />
+              ) : (
+                <span className="text-4xl">{selected.icon}</span>
+              )}
               <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-foreground leading-[1.1]">
                 {selected.title}
               </h1>
@@ -56,7 +71,7 @@ const ContentPage = () => {
 
             {/* Quiz */}
             <div className="rounded-xl border border-border bg-card p-6">
-              <h2 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">🧩 Challenge</h2>
+              <h2 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">🧩 Course</h2>
               <QuizBlock quiz={selected.quiz} />
             </div>
           </motion.div>
@@ -66,7 +81,7 @@ const ContentPage = () => {
   }
 
   return (
-    <div className="min-h-screen pt-24 py-12">
+    <div className="min-h-screen pt-14 md:pt-20 pb-12">
       <div className="container mx-auto px-6">
 
         {/* HEADER */}
@@ -75,8 +90,8 @@ const ContentPage = () => {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-12"
         >
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-foreground mb-4 leading-[1.05]">
-            Choose Your <span className="text-gradient">Challenge</span>
+          <h1 className="mt-7 text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-foreground mb-4 leading-[1.05]">
+            Choose Your <span className="text-gradient">Courses</span>
           </h1>
 
           <p className="text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto">

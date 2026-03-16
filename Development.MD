@@ -1,5 +1,5 @@
 
-# Kodelagi — Visual Foundation
+# Kodelogi — Visual Foundation
 
 Dokumen ini menjelaskan “fondasi visual” yang dipakai di project ini supaya desain antar halaman konsisten (warna, typography, komponen, spacing, dan pola UI).
 
